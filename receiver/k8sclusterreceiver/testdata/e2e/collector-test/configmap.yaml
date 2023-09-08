@@ -1,20 +1,19 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ .Name }}-config
+  name: otel-test-config
   namespace: default
 data:
   relay: |
     exporters:
-      otlp:
-        endpoint: {{ .HostEndpoint }}:4317
-        tls:
-          insecure: true
+      file:
+        path: /tmp/dumpcol/dump.json
     extensions:
       health_check: {}
     processors:
     receivers:
       k8s_cluster:
+        collection_interval: 60s
         node_conditions_to_report: []
         metrics:
           k8s.container.cpu_limit:
@@ -112,6 +111,6 @@ data:
       pipelines:
         metrics:
           exporters:
-          - otlp
+          - file
           receivers:
           - k8s_cluster

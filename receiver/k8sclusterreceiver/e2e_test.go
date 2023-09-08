@@ -126,3 +126,41 @@ func waitForData(t *testing.T, entriesNum int, mc *consumertest.MetricsSink) {
 		"failed to receive %d entries,  received %d metrics in %d minutes", entriesNum,
 		len(mc.AllMetrics()), timeoutMinutes)
 }
+
+func TestE2EHPA(t *testing.T) {
+	var expected pmetric.Metrics
+	expectedFile := filepath.Join("testdata", "e2e", "expected_hpa_only.yaml")
+	expected, err := golden.ReadMetrics(expectedFile)
+	require.NoError(t, err)
+	kubeConfig, err := clientcmd.BuildConfigFromFlags("", testKubeConfig)
+	require.NoError(t, err)
+	dynamicClient, err := dynamic.NewForConfig(kubeConfig)
+	require.NoError(t, err)
+
+	testID := uuid.NewString()[:8]
+	collectorObjs := k8stest.CreateCollectorObjects(t, dynamicClient, testID)
+
+	defer func() {
+		for _, obj := range append(collectorObjs) {
+			require.NoErrorf(t, k8stest.DeleteObject(dynamicClient, obj), "failed to delete object %s", obj.GetName())
+		}
+	}()
+
+	metricsConsumer := new(consumertest.MetricsSink)
+	wantEntries := 5 // Minimal number of metrics to wait for.
+	waitForData(t, wantEntries, metricsConsumer)
+
+	replaceWithStar := func(string) string { return "*" }
+
+	require.NoError(t, pmetrictest.CompareMetrics(expected, metricsConsumer.AllMetrics()[len(metricsConsumer.AllMetrics())-1],
+		pmetrictest.IgnoreTimestamp(),
+		pmetrictest.IgnoreStartTimestamp(),
+		pmetrictest.ChangeResourceAttributeValue("k8s.hpa.uid", replaceWithStar),
+		pmetrictest.IgnoreScopeVersion(),
+		pmetrictest.IgnoreResourceMetricsOrder(),
+		pmetrictest.IgnoreMetricsOrder(),
+		pmetrictest.IgnoreScopeMetricsOrder(),
+		pmetrictest.IgnoreMetricDataPointsOrder(),
+	),
+	)
+}

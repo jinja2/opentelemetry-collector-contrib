@@ -1,0 +1,197 @@
+resourceMetrics:
+  - resource:
+      attributes:
+        - key: k8s.hpa.uid
+          value:
+            stringValue: 678bd8de-f68f-401a-9dc2-37d98f3ced57
+        - key: k8s.hpa.name
+          value:
+            stringValue: hpa-v2
+        - key: k8s.namespace.name
+          value:
+            stringValue: default
+    scopeMetrics:
+      - scope:
+          name: otelcol/k8sclusterreceiver
+          version: 0.84.0-dev
+        metrics:
+          - name: k8s.hpa.current_replicas
+            description: Current number of pod replicas managed by this autoscaler.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "1"
+          - name: k8s.hpa.desired_replicas
+            description: Desired number of pod replicas managed by this autoscaler.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "1"
+          - name: k8s.hpa.max_replicas
+            description: Maximum number of replicas to which the autoscaler can scale up.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "2"
+          - name: k8s.hpa.min_replicas
+            description: Minimum number of replicas to which the autoscaler can scale up.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "1"
+    schemaUrl: https://opentelemetry.io/schemas/1.18.0
+  - resource:
+      attributes:
+        - key: k8s.hpa.uid
+          value:
+            stringValue: c999af61-7c90-4021-a66f-8bf050ca6184
+        - key: k8s.hpa.name
+          value:
+            stringValue: hpa-v2beta2
+        - key: k8s.namespace.name
+          value:
+            stringValue: default
+    scopeMetrics:
+      - scope:
+          name: otelcol/k8sclusterreceiver
+          version: 0.84.0-dev
+        metrics:
+          - name: k8s.hpa.current_replicas
+            description: Current number of pod replicas managed by this autoscaler.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "1"
+          - name: k8s.hpa.desired_replicas
+            description: Desired number of pod replicas managed by this autoscaler.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "1"
+          - name: k8s.hpa.max_replicas
+            description: Maximum number of replicas to which the autoscaler can scale up.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "2"
+          - name: k8s.hpa.min_replicas
+            description: Minimum number of replicas to which the autoscaler can scale up.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "1"
+    schemaUrl: https://opentelemetry.io/schemas/1.18.0
+  - resource:
+      attributes:
+        - key: k8s.hpa.uid
+          value:
+            stringValue: 678bd8de-f68f-401a-9dc2-37d98f3ced57
+        - key: k8s.hpa.name
+          value:
+            stringValue: hpa-v2
+        - key: k8s.namespace.name
+          value:
+            stringValue: default
+    scopeMetrics:
+      - scope:
+          name: otelcol/k8sclusterreceiver
+          version: 0.84.0-dev
+        metrics:
+          - name: k8s.hpa.current_replicas
+            description: Current number of pod replicas managed by this autoscaler.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "1"
+          - name: k8s.hpa.desired_replicas
+            description: Desired number of pod replicas managed by this autoscaler.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "1"
+          - name: k8s.hpa.max_replicas
+            description: Maximum number of replicas to which the autoscaler can scale up.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "2"
+          - name: k8s.hpa.min_replicas
+            description: Minimum number of replicas to which the autoscaler can scale up.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "1"
+    schemaUrl: https://opentelemetry.io/schemas/1.18.0
+  - resource:
+      attributes:
+        - key: k8s.hpa.uid
+          value:
+            stringValue: c999af61-7c90-4021-a66f-8bf050ca6184
+        - key: k8s.hpa.name
+          value:
+            stringValue: hpa-v2beta2
+        - key: k8s.namespace.name
+          value:
+            stringValue: default
+    scopeMetrics:
+      - scope:
+          name: otelcol/k8sclusterreceiver
+          version: 0.84.0-dev
+        metrics:
+          - name: k8s.hpa.current_replicas
+            description: Current number of pod replicas managed by this autoscaler.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "1"
+          - name: k8s.hpa.desired_replicas
+            description: Desired number of pod replicas managed by this autoscaler.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "1"
+          - name: k8s.hpa.max_replicas
+            description: Maximum number of replicas to which the autoscaler can scale up.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "2"
+          - name: k8s.hpa.min_replicas
+            description: Minimum number of replicas to which the autoscaler can scale up.
+            unit: "1"
+            gauge:
+              dataPoints:
+                - startTimeUnixNano: "1694191539133891970"
+                  timeUnixNano: "1694191599780251921"
+                  asInt: "1"
+    schemaUrl: https://opentelemetry.io/schemas/1.18.0

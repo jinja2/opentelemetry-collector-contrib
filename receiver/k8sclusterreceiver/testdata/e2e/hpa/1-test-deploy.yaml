@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: test-deploy
+  labels:
+    app: busybox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: busybox
+  template:
+    metadata:
+      labels:
+        app: busybox
+    spec:
+      terminationGracePeriodSeconds: 0
+      containers:
+        - name: busybox
+          image: busybox
+          command:
+            - "/bin/sh"
+            - "-c"
+            - "tail -f /dev/null"
+          resources:
+            requests:
+              cpu: 10m
