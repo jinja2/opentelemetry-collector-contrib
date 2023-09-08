@@ -3,7 +3,7 @@ resourceMetrics:
       attributes:
         - key: k8s.hpa.uid
           value:
-            stringValue: 678bd8de-f68f-401a-9dc2-37d98f3ced57
+            stringValue: 75bec886-ca51-46c9-939a-ba36930633dd
         - key: k8s.hpa.name
           value:
             stringValue: hpa-v2
@@ -20,39 +20,39 @@ resourceMetrics:
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "1"
           - name: k8s.hpa.desired_replicas
             description: Desired number of pod replicas managed by this autoscaler.
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "1"
           - name: k8s.hpa.max_replicas
             description: Maximum number of replicas to which the autoscaler can scale up.
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "2"
           - name: k8s.hpa.min_replicas
             description: Minimum number of replicas to which the autoscaler can scale up.
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "1"
     schemaUrl: https://opentelemetry.io/schemas/1.18.0
   - resource:
       attributes:
         - key: k8s.hpa.uid
           value:
-            stringValue: c999af61-7c90-4021-a66f-8bf050ca6184
+            stringValue: 745e7b96-9661-41b8-a4e4-0d4679b44066
         - key: k8s.hpa.name
           value:
             stringValue: hpa-v2beta2
@@ -69,39 +69,39 @@ resourceMetrics:
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "1"
           - name: k8s.hpa.desired_replicas
             description: Desired number of pod replicas managed by this autoscaler.
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "1"
           - name: k8s.hpa.max_replicas
             description: Maximum number of replicas to which the autoscaler can scale up.
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "2"
           - name: k8s.hpa.min_replicas
             description: Minimum number of replicas to which the autoscaler can scale up.
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "1"
     schemaUrl: https://opentelemetry.io/schemas/1.18.0
   - resource:
       attributes:
         - key: k8s.hpa.uid
           value:
-            stringValue: 678bd8de-f68f-401a-9dc2-37d98f3ced57
+            stringValue: 75bec886-ca51-46c9-939a-ba36930633dd
         - key: k8s.hpa.name
           value:
             stringValue: hpa-v2
@@ -118,39 +118,39 @@ resourceMetrics:
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "1"
           - name: k8s.hpa.desired_replicas
             description: Desired number of pod replicas managed by this autoscaler.
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "1"
           - name: k8s.hpa.max_replicas
             description: Maximum number of replicas to which the autoscaler can scale up.
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "2"
           - name: k8s.hpa.min_replicas
             description: Minimum number of replicas to which the autoscaler can scale up.
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "1"
     schemaUrl: https://opentelemetry.io/schemas/1.18.0
   - resource:
       attributes:
         - key: k8s.hpa.uid
           value:
-            stringValue: c999af61-7c90-4021-a66f-8bf050ca6184
+            stringValue: 745e7b96-9661-41b8-a4e4-0d4679b44066
         - key: k8s.hpa.name
           value:
             stringValue: hpa-v2beta2
@@ -167,31 +167,31 @@ resourceMetrics:
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "1"
           - name: k8s.hpa.desired_replicas
             description: Desired number of pod replicas managed by this autoscaler.
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "1"
           - name: k8s.hpa.max_replicas
             description: Maximum number of replicas to which the autoscaler can scale up.
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "2"
           - name: k8s.hpa.min_replicas
             description: Minimum number of replicas to which the autoscaler can scale up.
             unit: "1"
             gauge:
               dataPoints:
-                - startTimeUnixNano: "1694191539133891970"
-                  timeUnixNano: "1694191599780251921"
+                - startTimeUnixNano: "1694201008099874028"
+                  timeUnixNano: "1694201068650266818"
                   asInt: "1"
     schemaUrl: https://opentelemetry.io/schemas/1.18.0
