@@ -16,6 +16,10 @@ import (
 	"k8s.io/apimachinery/pkg/types"
 )
 
+func ptrInt32(i int32) *int32 {
+	return &i
+}
+
 func NewHPA(id string) *autoscalingv2.HorizontalPodAutoscaler {
 	minReplicas := int32(2)
 	return &autoscalingv2.HorizontalPodAutoscaler{
@@ -35,6 +39,40 @@ func NewHPA(id string) *autoscalingv2.HorizontalPodAutoscaler {
 				Kind:       "Deployment",
 				Name:       "test-deployment",
 				APIVersion: "apps/v1",
+			},
+			Metrics: []autoscalingv2.MetricSpec{
+				{
+					Type: autoscalingv2.ResourceMetricSourceType,
+					Resource: &autoscalingv2.ResourceMetricSource{
+						Name: corev1.ResourceCPU,
+						Target: autoscalingv2.MetricTarget{
+							Type:               autoscalingv2.UtilizationMetricType,
+							AverageUtilization: ptrInt32(80),
+						},
+					},
+				},
+				{
+					Type: autoscalingv2.ContainerResourceMetricSourceType,
+					ContainerResource: &autoscalingv2.ContainerResourceMetricSource{
+						Name:      corev1.ResourceCPU,
+						Container: "test-container-1",
+						Target: autoscalingv2.MetricTarget{
+							Type:         autoscalingv2.AverageValueMetricType,
+							AverageValue: resource.NewMilliQuantity(1500, resource.DecimalSI),
+						},
+					},
+				},
+				{
+					Type: autoscalingv2.ContainerResourceMetricSourceType,
+					ContainerResource: &autoscalingv2.ContainerResourceMetricSource{
+						Name:      corev1.ResourceCPU,
+						Container: "test-container-2",
+						Target: autoscalingv2.MetricTarget{
+							Type:  autoscalingv2.ValueMetricType,
+							Value: resource.NewMilliQuantity(500, resource.DecimalSI),
+						},
+					},
+				},
 			},
 		},
 	}

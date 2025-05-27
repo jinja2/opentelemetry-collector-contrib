@@ -100,6 +100,10 @@ func (dc *DataCollector) CollectMetricData(currentTime time.Time) pmetric.Metric
 		cronjob.RecordMetrics(dc.metricsBuilder, o.(*batchv1.CronJob), ts)
 	})
 	dc.metadataStore.ForEach(gvk.HorizontalPodAutoscaler, func(o any) {
+		crm := hpa.CustomMetrics(dc.settings, dc.metricsBuilder.NewResourceBuilder(), o.(*autoscalingv2.HorizontalPodAutoscaler), ts)
+		if crm.ScopeMetrics().Len() > 0 {
+			crm.MoveTo(customRMs.AppendEmpty())
+		}
 		hpa.RecordMetrics(dc.metricsBuilder, o.(*autoscalingv2.HorizontalPodAutoscaler), ts)
 	})
 	dc.metadataStore.ForEach(gvk.ClusterResourceQuota, func(o any) {

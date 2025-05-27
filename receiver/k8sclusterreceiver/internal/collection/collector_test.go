@@ -107,7 +107,7 @@ func TestCollectMetricData(t *testing.T) {
 			"horizontalpodautoscaler1-uid": testutils.NewHPA("1"),
 		},
 	})
-	expectedRMs++
+	expectedRMs += 2 // hpa reports standard and custom metrics
 
 	dc := NewDataCollector(receivertest.NewNopSettings(metadata.Type), ms, metadata.DefaultMetricsBuilderConfig(), []string{"Ready"}, nil)
 	m1 := dc.CollectMetricData(time.Now())
