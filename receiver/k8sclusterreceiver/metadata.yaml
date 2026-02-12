@@ -590,8 +590,7 @@ metrics:
     enabled: false
     description: The number of endpoints for a service, broken down by condition, address type, and zone.
     unit: "{endpoint}"
-    stability:
-      level: development
+    stability: development
     gauge:
       value_type: int
     attributes:
@@ -603,8 +602,7 @@ metrics:
     enabled: false
     description: The number of load balancer ingress points (external IPs/hostnames) assigned to the service.
     unit: "{ingress}"
-    stability:
-      level: development
+    stability: development
     gauge:
       value_type: int
 
