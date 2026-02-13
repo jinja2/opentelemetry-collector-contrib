@@ -8,7 +8,7 @@ component: pkg/xk8stest
 note: Fix IPv6 gateway handling in HostEndpoint to avoid invalid address formatting in e2e tests
 
 # Mandatory: One or more tracking issues related to the change. You can use the PR number here if no issue exists.
-issues: []
+issues: [46082]
 
 # (Optional) One or more lines of additional information to render under the primary note.
 # These lines will be padded with 2 spaces and then inserted directly into the document.
