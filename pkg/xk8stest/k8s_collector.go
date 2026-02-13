@@ -5,7 +5,6 @@ package xk8stest // import "github.com/open-telemetry/opentelemetry-collector-co
 
 import (
 	"bytes"
-	"io"
 	"maps"
 	"os"
 	"path/filepath"
@@ -19,21 +18,9 @@ import (
 	"k8s.io/apimachinery/pkg/apis/meta/v1/unstructured"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/runtime/schema"
-	"k8s.io/client-go/kubernetes"
 )
 
-// CollectorStartOptions configures the behavior of WaitForCollectorToStart.
-type CollectorStartOptions struct {
-	// Clientset is an optional typed Kubernetes client. When set, previous container logs
-	// are fetched and printed on crash detection, making it easier to debug startup failures.
-	Clientset *kubernetes.Clientset
-}
-
 func CreateCollectorObjects(t *testing.T, client *K8sClient, testID, manifestsDir string, templateValues map[string]string, host string) []*unstructured.Unstructured {
-	return CreateCollectorObjectsWithOptions(t, client, testID, manifestsDir, templateValues, host, CollectorStartOptions{})
-}
-
-func CreateCollectorObjectsWithOptions(t *testing.T, client *K8sClient, testID, manifestsDir string, templateValues map[string]string, host string, opts CollectorStartOptions) []*unstructured.Unstructured {
 	if manifestsDir == "" {
 		manifestsDir = filepath.Join(".", "testdata", "e2e", "collector")
 	}
@@ -66,17 +53,12 @@ func CreateCollectorObjectsWithOptions(t *testing.T, client *K8sClient, testID, 
 		createdObjs = append(createdObjs, obj)
 	}
 
-	WaitForCollectorToStart(t, client, podNamespace, podLabels, opts)
+	WaitForCollectorToStart(t, client, podNamespace, podLabels)
 
 	return createdObjs
 }
 
-func WaitForCollectorToStart(t *testing.T, client *K8sClient, podNamespace string, podLabels map[string]any, opts ...CollectorStartOptions) {
-	var startOpts CollectorStartOptions
-	if len(opts) > 0 {
-		startOpts = opts[0]
-	}
-
+func WaitForCollectorToStart(t *testing.T, client *K8sClient, podNamespace string, podLabels map[string]any) {
 	podGVR := schema.GroupVersionResource{Version: "v1", Resource: "pods"}
 	listOptions := metav1.ListOptions{LabelSelector: SelectorFromMap(podLabels).String()}
 	podTimeoutMinutes := 3
@@ -115,10 +97,6 @@ func WaitForCollectorToStart(t *testing.T, client *K8sClient, podNamespace strin
 					if restartCount > 0 && cs.LastTerminationState.Terminated != nil {
 						t.Logf("restart count = %d for container %s in pod %s, last terminated reason: %s", restartCount, cs.Name, pod.Name, cs.LastTerminationState.Terminated.Reason)
 						t.Logf("termination message: %s", cs.LastTerminationState.Terminated.Message)
-						// Fetch previous container logs if a clientset was provided
-						if startOpts.Clientset != nil {
-							fetchPreviousContainerLogs(t, startOpts.Clientset, podNamespace, pod.Name, cs.Name)
-						}
 					}
 				}
 			}
@@ -130,24 +108,4 @@ func WaitForCollectorToStart(t *testing.T, client *K8sClient, podNamespace strin
 		return false
 	}, time.Duration(podTimeoutMinutes)*time.Minute, 2*time.Second,
 		"collector pods were not ready within %d minutes", podTimeoutMinutes)
-}
-
-func fetchPreviousContainerLogs(t *testing.T, clientset *kubernetes.Clientset, namespace, podName, containerName string) {
-	tailLines := int64(50)
-	logOpts := &v1.PodLogOptions{Container: containerName, Previous: true, TailLines: &tailLines}
-	req := clientset.CoreV1().Pods(namespace).GetLogs(podName, logOpts)
-	logStream, err := req.Stream(t.Context())
-	if err != nil {
-		t.Logf("failed to fetch previous logs for %s/%s: %v", podName, containerName, err)
-		return
-	}
-	defer logStream.Close()
-	logBytes, err := io.ReadAll(logStream)
-	if err != nil {
-		t.Logf("failed to read previous logs for %s/%s: %v", podName, containerName, err)
-		return
-	}
-	if len(logBytes) > 0 {
-		t.Logf("previous container logs for %s/%s:\n%s", podName, containerName, string(logBytes))
-	}
 }
