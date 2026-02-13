@@ -20,7 +20,7 @@ import (
 )
 
 func TestTransform(t *testing.T) {
-	trafficDist := "PreferClose"
+	trafficDist := "PreferSameZone"
 	originalService := &corev1.Service{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      "test-service",
@@ -62,7 +62,7 @@ func TestTransform(t *testing.T) {
 	assert.Equal(t, map[string]string{"app": "test"}, transformed.Labels)
 	assert.True(t, transformed.Spec.PublishNotReadyAddresses)
 	assert.NotNil(t, transformed.Spec.TrafficDistribution)
-	assert.Equal(t, "PreferClose", *transformed.Spec.TrafficDistribution)
+	assert.Equal(t, "PreferSameZone", *transformed.Spec.TrafficDistribution)
 	assert.Len(t, transformed.Status.LoadBalancer.Ingress, 1)
 	assert.Equal(t, "1.2.3.4", transformed.Status.LoadBalancer.Ingress[0].IP)
 
@@ -363,7 +363,7 @@ func TestShouldSkipAnnotation(t *testing.T) {
 }
 
 func TestGetMetadata(t *testing.T) {
-	trafficDist := "PreferClose"
+	trafficDist := "PreferSameZone"
 	service := &corev1.Service{
 		ObjectMeta: metav1.ObjectMeta{
 			Name:      "test-service",

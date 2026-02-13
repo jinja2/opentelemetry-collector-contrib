@@ -26,6 +26,8 @@ import (
 	"go.opentelemetry.io/collector/pdata/pmetric"
 	"go.opentelemetry.io/collector/receiver/otlpreceiver"
 	"go.opentelemetry.io/collector/receiver/receivertest"
+	"k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/tools/clientcmd"
 
 	"github.com/open-telemetry/opentelemetry-collector-contrib/pkg/golden"
 	"github.com/open-telemetry/opentelemetry-collector-contrib/pkg/pdatatest/plogtest"
@@ -72,7 +74,7 @@ func TestE2EClusterScoped(t *testing.T) {
 	defer shutdownSink()
 
 	testID := uuid.NewString()[:8]
-	collectorObjs := k8stest.CreateCollectorObjects(t, k8sClient, testID, filepath.Join(".", "testdata", "e2e", "cluster-scoped", "collector"), map[string]string{}, "")
+	collectorObjs := k8stest.CreateCollectorObjectsWithOptions(t, k8sClient, testID, filepath.Join(".", "testdata", "e2e", "cluster-scoped", "collector"), map[string]string{}, "", collectorStartOpts(t))
 
 	t.Cleanup(func() {
 		for _, obj := range append(collectorObjs) {
@@ -167,7 +169,7 @@ func TestE2ENamespaceScoped(t *testing.T) {
 	defer shutdownSink()
 
 	testID := uuid.NewString()[:8]
-	collectorObjs := k8stest.CreateCollectorObjects(t, k8sClient, testID, filepath.Join(".", "testdata", "e2e", "namespace-scoped", "collector"), map[string]string{}, "")
+	collectorObjs := k8stest.CreateCollectorObjectsWithOptions(t, k8sClient, testID, filepath.Join(".", "testdata", "e2e", "namespace-scoped", "collector"), map[string]string{}, "", collectorStartOpts(t))
 
 	t.Cleanup(func() {
 		for _, obj := range append(collectorObjs) {
@@ -594,4 +596,14 @@ func replaceLogValues(t *testing.T, logs plog.Logs, replacements map[string]map[
 			require.NoError(t, err)
 		}
 	}
+}
+
+// collectorStartOpts creates CollectorStartOptions with a typed Kubernetes clientset
+// to enable fetching previous container logs when the collector crashes during startup.
+func collectorStartOpts(t *testing.T) k8stest.CollectorStartOptions {
+	restConfig, err := clientcmd.BuildConfigFromFlags("", testKubeConfig)
+	require.NoError(t, err)
+	clientset, err := kubernetes.NewForConfig(restConfig)
+	require.NoError(t, err)
+	return k8stest.CollectorStartOptions{Clientset: clientset}
 }
