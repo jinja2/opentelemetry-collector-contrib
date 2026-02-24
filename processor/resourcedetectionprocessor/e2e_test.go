@@ -400,6 +400,7 @@ func TestE2ELambdaDetector(t *testing.T) {
 // and verifying that consul metadata (datacenter, node ID, hostname, and custom meta labels)
 // is correctly detected and attached to metrics.
 func TestE2EConsulDetector(t *testing.T) {
+	t.Skip("Skipping: pod stuck in Pending state in CI. See https://github.com/open-telemetry/opentelemetry-collector-contrib/issues/46302")
 	var expected pmetric.Metrics
 	expectedFile := filepath.Join("testdata", "e2e", "consul", "expected.yaml")
 	expected, err := golden.ReadMetrics(expectedFile)
