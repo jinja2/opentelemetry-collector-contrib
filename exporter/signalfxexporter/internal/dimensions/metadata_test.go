@@ -171,6 +171,31 @@ func TestGetDimensionUpdateFromMetadata(t *testing.T) {
 			},
 		},
 		{
+			"Test k8s.pod.uid dimension converts k8s.service tag to kubernetes_service_ sfTag",
+			args{
+				metadata: metadata.MetadataUpdate{
+					ResourceIDKey: "k8s.pod.uid",
+					ResourceID:    "pod-123",
+					MetadataDelta: metadata.MetadataDelta{
+						MetadataToAdd: map[string]string{
+							"k8s.service.my-service": "",
+							"k8s.pod.name":           "my-pod",
+						},
+					},
+				},
+			},
+			&DimensionUpdate{
+				Name:  "k8s.pod.uid",
+				Value: "pod-123",
+				Properties: getMapToPointers(map[string]string{
+					"k8s.pod.name": "my-pod",
+				}),
+				Tags: map[string]bool{
+					"kubernetes_service_my-service": true,
+				},
+			},
+		},
+		{
 			"Test k8s.service.uid dimension skips conversion to kubernetes_service_",
 			args{
 				metadata: metadata.MetadataUpdate{
